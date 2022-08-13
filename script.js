@@ -1,8 +1,15 @@
 let score = "";
 let calculation = "";
+let operation = "";
 function refreshScore() {
   document.querySelector(".result").textContent = score;
 }
+
+function resetScore() {
+  score = "";
+  operation = "";
+}
+
 //numbers buttons
 document.querySelector(".num1").addEventListener("click", function () {
   score = score + "1";
@@ -54,29 +61,8 @@ document.querySelector(".num0").addEventListener("click", function () {
   refreshScore();
 });
 
-//action buttons
-document.querySelector(".multiply").addEventListener("click", function () {
-  score = score + "x";
-  refreshScore();
-});
-
-document.querySelector(".subtract").addEventListener("click", function () {
-  score = score + "-";
-  refreshScore();
-});
-
-document.querySelector(".add").addEventListener("click", function () {
-  score = score + "+";
-  refreshScore();
-});
-
-document.querySelector(".divide").addEventListener("click", function () {
-  score = score + ":";
-  refreshScore();
-});
-
 document.querySelector(".reset").addEventListener("click", function () {
-  score = "";
+  resetScore();
   refreshScore();
 });
 
@@ -101,4 +87,76 @@ document.addEventListener("keypress", function (event) {
     score = score + calcInput;
     refreshScore();
   }
+});
+
+const calculate = () => {
+  if (operation === "add") {
+    score = Number(part1) + Number(score);
+    refreshScore();
+  } else if (operation === "subtract") {
+    score = Number(part1) - Number(score);
+    refreshScore();
+  } else if (operation === "multiply") {
+    score = Number(part1) * Number(score);
+    refreshScore();
+  } else if (operation === "divide") {
+    score = Number(part1) / Number(score);
+    refreshScore();
+  }
+};
+
+//action buttons
+document.querySelector(".multiply").addEventListener("click", function () {
+  multiply();
+});
+
+function multiply() {
+  if (!operation) {
+    part1 = Number(score);
+    score = "";
+  }
+  operation = "multiply";
+  refreshScore();
+}
+
+document.querySelector(".subtract").addEventListener("click", function () {
+  subtract();
+});
+
+function subtract() {
+  if (!operation) {
+    part1 = Number(score);
+    score = "";
+  }
+  operation = "subtract";
+  refreshScore();
+}
+
+document.querySelector(".add").addEventListener("click", function () {
+  add();
+});
+
+function add() {}
+if (!operation) {
+  part1 = Number(score);
+  score = "";
+}
+operation = "add";
+refreshScore();
+
+document.querySelector(".divide").addEventListener("click", function () {
+  divide();
+});
+
+function divide() {
+  if (!operation) {
+    part1 = Number(score);
+    score = "";
+  }
+  operation = "divide";
+  refreshScore();
+}
+
+document.querySelector(".calculate").addEventListener("click", function () {
+  calculate();
 });

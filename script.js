@@ -136,13 +136,14 @@ document.querySelector(".add").addEventListener("click", function () {
   add();
 });
 
-function add() {}
+function add() {
 if (!operation) {
   part1 = Number(score);
   score = "";
 }
 operation = "add";
 refreshScore();
+}
 
 document.querySelector(".divide").addEventListener("click", function () {
   divide();
